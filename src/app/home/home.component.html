@@ -20,10 +20,19 @@
     <br />
     <button
       class="btn btn-primary"
-      id="addLocationBtn"
+      id="add-location-btn"
       [disabled]="addLocationForm.invalid"
     >
       Add location
+    </button>
+    <button
+      class="btn btn-danger"
+      id="clear-location-btn"
+      type="button"
+      [disabled]="!locations?.length"
+      (click)="clearLocations()"
+    >
+      Clear locations
     </button>
   </form>
   <div>

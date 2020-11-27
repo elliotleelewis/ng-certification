@@ -1,3 +1,5 @@
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -16,7 +18,9 @@ const ROUTES: Routes = [
 @NgModule({
   imports: [
     BrowserModule,
+    CommonModule,
     FormsModule,
+    HttpClientModule,
     RouterModule.forRoot(ROUTES, { useHash: true }),
   ],
   declarations: [

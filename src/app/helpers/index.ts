@@ -1,18 +1,52 @@
 import { Condition } from '../enums';
+import { OpenWeatherMapWeatherReport, WeatherReport } from '../models';
+
+export function convertKelvinToFahrenheit(kelvin: number) {
+  return (kelvin - 273.15) * 1.8 + 32;
+}
+
+export function mapWeatherReport(
+  weatherReport: OpenWeatherMapWeatherReport,
+  zipcode: string,
+): WeatherReport {
+  return {
+    locationName: weatherReport.name,
+    zipcode,
+    currentCondition: getCondition(weatherReport.weather?.[0].main),
+    temp: convertKelvinToFahrenheit(weatherReport.main.temp),
+    maxTemp: convertKelvinToFahrenheit(weatherReport.main.temp_max),
+    minTemp: convertKelvinToFahrenheit(weatherReport.main.temp_min),
+  };
+}
+
+export function getCondition(conditionString: string): Condition {
+  switch (conditionString) {
+    case 'Clear':
+      return Condition.sun;
+    case 'Snow':
+      return Condition.snow;
+    case 'Rain':
+      return Condition.rain;
+    case 'Clouds':
+      return Condition.clouds;
+    default:
+      return Condition.error;
+  }
+}
 
 export function getConditionImageUrl(condition: Condition): string {
-  const baseUrl = 'https://www.angulartraining.com/images/weather';
+  const IMG_BASE_URL = 'https://www.angulartraining.com/images/weather';
   switch (condition) {
     case Condition.sun:
-      return `${baseUrl}/sun.png`;
+      return `${IMG_BASE_URL}/sun.png`;
     case Condition.snow:
-      return `${baseUrl}/snow.png`;
+      return `${IMG_BASE_URL}/snow.png`;
     case Condition.rain:
-      return `${baseUrl}/rain.png`;
+      return `${IMG_BASE_URL}/rain.png`;
     case Condition.clouds:
-      return `${baseUrl}/clouds.png`;
+      return `${IMG_BASE_URL}/clouds.png`;
     default:
-      return 'ERROR: Invalid Condition';
+      return '/assets/error.svg';
   }
 }
 

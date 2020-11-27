@@ -49,4 +49,8 @@ export class LocationService {
     }
     this._locations = locations;
   }
+
+  clearLocations(): void {
+    this._locations = [];
+  }
 }
