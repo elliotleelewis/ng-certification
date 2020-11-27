@@ -1,15 +1,17 @@
 <div class="container-fluid">
-  <div class="well">
-    <h2>Enter a zipcode:</h2>
+  <form class="well" (ngSubmit)="addLocation()">
+    <label class="h2" for="zipcode">Enter a zipcode:</label>
     <input
+      id="zipcode"
       class="form-control"
+      name="zipcode"
       placeholder="Zipcode"
       type="text"
-      id="addLocation"
+      [(ngModel)]="addLocationFormData.zipcode"
     />
     <br />
     <button class="btn btn-primary" id="addLocationBtn">Add location</button>
-  </div>
+  </form>
   <div>
     <div class="well flex">
       <div>
@@ -18,7 +20,9 @@
         <h4>Temperatures today:</h4>
         <p>Current 58 - Max 65 - Min 48</p>
         <p>
-          <a routerLink="/forecast/95742">Show 5-day forecast for Rancho Cordova</a>
+          <a routerLink="/forecast/95742"
+            >Show 5-day forecast for Rancho Cordova</a
+          >
         </p>
       </div>
       <div>
