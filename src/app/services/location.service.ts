@@ -33,17 +33,17 @@ export class LocationService {
     this._locations$.next(value);
   }
 
-  addLocation(location: string): void {
+  addLocation(zipcode: string): void {
     const locations = this._locations;
-    if (!locations.includes(location)) {
-      locations.push(location);
+    if (!locations.includes(zipcode)) {
+      locations.push(zipcode);
     }
     this._locations = locations;
   }
 
-  removeLocation(location: string): void {
+  removeLocation(zipcode: string): void {
     const locations = this._locations;
-    const locationIndex = locations.indexOf(location);
+    const locationIndex = locations.indexOf(zipcode);
     if (locationIndex > -1) {
       locations.splice(locationIndex, 1);
     }

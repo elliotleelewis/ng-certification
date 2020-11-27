@@ -1,5 +1,9 @@
 <div class="container-fluid">
-  <form class="well" (ngSubmit)="addLocation()">
+  <form
+    class="well"
+    #addLocationForm="ngForm"
+    (ngSubmit)="addLocation(); addLocationForm.reset()"
+  >
     <label class="h2" for="zipcode">Enter a zipcode:</label>
     <input
       id="zipcode"
@@ -7,28 +11,25 @@
       name="zipcode"
       placeholder="Zipcode"
       type="text"
+      required
+      [pattern]="'^[0-9]{5}$'"
+      [maxLength]="5"
+      [minLength]="5"
       [(ngModel)]="addLocationFormData.zipcode"
     />
     <br />
-    <button class="btn btn-primary" id="addLocationBtn">Add location</button>
+    <button
+      class="btn btn-primary"
+      id="addLocationBtn"
+      [disabled]="addLocationForm.invalid"
+    >
+      Add location
+    </button>
   </form>
   <div>
-    <div class="well flex">
-      <div>
-        <h3>Rancho Cordova (95742)</h3>
-        <h4>Current conditions: Clouds</h4>
-        <h4>Temperatures today:</h4>
-        <p>Current 58 - Max 65 - Min 48</p>
-        <p>
-          <a routerLink="/forecast/95742"
-            >Show 5-day forecast for Rancho Cordova</a
-          >
-        </p>
-      </div>
-      <div>
-        <span class="close">×</span>
-        <img src="https://www.angulartraining.com/images/weather/sun.png" />
-      </div>
-    </div>
+    <app-weather-report
+      *ngFor="let weatherReport of weatherReports"
+      [weatherReport]="weatherReport"
+    ></app-weather-report>
   </div>
 </div>
