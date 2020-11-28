@@ -1,9 +1,10 @@
 import { Condition } from '../enums';
-import { OpenWeatherMapWeatherReport, WeatherReport } from '../models';
-
-export function convertKelvinToFahrenheit(kelvin: number) {
-  return (kelvin - 273.15) * 1.8 + 32;
-}
+import {
+  DailyForecast,
+  OpenWeatherMapDailyForecast,
+  OpenWeatherMapWeatherReport,
+  WeatherReport,
+} from '../models';
 
 export function mapWeatherReport(
   weatherReport: OpenWeatherMapWeatherReport,
@@ -12,10 +13,26 @@ export function mapWeatherReport(
   return {
     locationName: weatherReport.name,
     zipcode,
-    currentCondition: getCondition(weatherReport.weather?.[0].main),
-    temp: convertKelvinToFahrenheit(weatherReport.main.temp),
-    maxTemp: convertKelvinToFahrenheit(weatherReport.main.temp_max),
-    minTemp: convertKelvinToFahrenheit(weatherReport.main.temp_min),
+    condition: getCondition(weatherReport.weather?.[0].main),
+    temp: weatherReport.main.temp,
+    maxTemp: weatherReport.main.temp_max,
+    minTemp: weatherReport.main.temp_min,
+  };
+}
+
+export function mapDailyForecast(
+  dailyForecast: OpenWeatherMapDailyForecast,
+  zipcode: string,
+): DailyForecast {
+  return {
+    locationName: dailyForecast.city.name,
+    zipcode,
+    list: dailyForecast.list.splice(0, 5).map((item) => ({
+      dateTime: new Date(item.dt * 1000),
+      condition: getCondition(item.weather?.[0].main),
+      maxTemp: item.temp.max,
+      minTemp: item.temp.min,
+    })),
   };
 }
 

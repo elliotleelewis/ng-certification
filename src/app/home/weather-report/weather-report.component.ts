@@ -15,11 +15,11 @@ export class WeatherReportComponent {
   @HostBinding('class.well')
   readonly classWell = true;
 
+  readonly getConditionString = getConditionString;
+  readonly getConditionImageUrl = getConditionImageUrl;
+
   @Input()
   weatherReport!: WeatherReport;
-
-  getConditionString = getConditionString;
-  getConditionImageUrl = getConditionImageUrl;
 
   constructor(private locationService: LocationService) {}
 

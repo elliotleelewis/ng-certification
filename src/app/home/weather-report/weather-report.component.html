@@ -2,7 +2,7 @@
   <h3>{{ weatherReport?.locationName }} ({{ weatherReport?.zipcode }})</h3>
   <h4>
     Current conditions:
-    {{ getConditionString(weatherReport?.currentCondition) }}
+    {{ getConditionString(weatherReport?.condition) }}
   </h4>
   <h4>Temperatures today:</h4>
   <p>
@@ -19,7 +19,7 @@
 <div>
   <span class="close" role="button" (click)="removeLocation()">×</span>
   <img
-    [src]="getConditionImageUrl(weatherReport?.currentCondition)"
-    [alt]="getConditionString(weatherReport?.currentCondition)"
+    [src]="getConditionImageUrl(weatherReport?.condition)"
+    [alt]="getConditionString(weatherReport?.condition)"
   />
 </div>

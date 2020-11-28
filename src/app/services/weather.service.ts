@@ -3,8 +3,13 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
-import { mapWeatherReport } from '../helpers';
-import { OpenWeatherMapWeatherReport, WeatherReport } from '../models';
+import { mapDailyForecast, mapWeatherReport } from '../helpers';
+import {
+  DailyForecast,
+  OpenWeatherMapDailyForecast,
+  OpenWeatherMapWeatherReport,
+  WeatherReport,
+} from '../models';
 
 @Injectable({
   providedIn: 'root',
@@ -25,6 +30,7 @@ export class WeatherService {
         {
           params: {
             zip: zipcode,
+            units: 'imperial',
             appid: WeatherService.API_KEY,
           },
         },
@@ -38,6 +44,33 @@ export class WeatherService {
             locationName: 'ERROR',
             zipcode,
           } as Partial<WeatherReport>),
+        ),
+      );
+  }
+
+  getForecast(
+    zipcode: string,
+  ): Observable<DailyForecast | Partial<DailyForecast>> {
+    return this.httpClient
+      .get<OpenWeatherMapDailyForecast>(
+        `${WeatherService.API_BASE_URL}/forecast/daily`,
+        {
+          params: {
+            zip: zipcode,
+            units: 'imperial',
+            appid: WeatherService.API_KEY,
+          },
+        },
+      )
+      .pipe(
+        map((forecast: OpenWeatherMapDailyForecast) =>
+          mapDailyForecast(forecast, zipcode),
+        ),
+        catchError(() =>
+          of({
+            locationName: 'ERROR',
+            zipcode,
+          } as Partial<DailyForecast>),
         ),
       );
   }

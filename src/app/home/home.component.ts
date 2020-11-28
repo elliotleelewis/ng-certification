@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   };
   weatherReports: Array<WeatherReport | Partial<WeatherReport>> = [];
 
-  private subsink = new SubSink();
+  private subs = new SubSink();
 
   constructor(
     private locationService: LocationService,
@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.subsink.sink = this.locationService.location$
+    this.subs.sink = this.locationService.location$
       .pipe(
         switchMap((locations) => {
           this.locations = locations;
@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subsink.unsubscribe();
+    this.subs.unsubscribe();
   }
 
   addLocation(): void {
