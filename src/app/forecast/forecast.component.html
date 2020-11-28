@@ -1,12 +1,11 @@
 <div class="container-fluid">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title">
-        5-day forecast for {{ dailyForecast?.locationName }}
-      </h3>
+  <div class="card mb-2">
+    <div class="card-header">
+      <span class="card-title h3"
+        >5-day forecast for {{ dailyForecast?.locationName }}</span
+      >
     </div>
-    <ul class="list-group">
-      <!---->
+    <ul class="list-group list-group-flush">
       <li *ngFor="let item of dailyForecast?.list" class="list-group-item">
         {{ item.dateTime | date: 'EEEE, LLL d' }}:
         {{ getConditionString(item.condition) }} - Min:

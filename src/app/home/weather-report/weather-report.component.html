@@ -1,25 +1,31 @@
-<div>
-  <h3>{{ weatherReport?.locationName }} ({{ weatherReport?.zipcode }})</h3>
-  <h4>
-    Current conditions:
-    {{ getConditionString(weatherReport?.condition) }}
-  </h4>
-  <h4>Temperatures today:</h4>
-  <p>
-    Current {{ weatherReport?.temp | number: '1.0-0' }} - Max
-    {{ weatherReport?.maxTemp | number: '1.0-0' }} - Min
-    {{ weatherReport?.minTemp | number: '1.0-0' }}
-  </p>
-  <p>
-    <a [routerLink]="['/forecast', weatherReport?.zipcode || '']"
-      >Show 5-day forecast for {{ weatherReport?.locationName }}</a
-    >
-  </p>
-</div>
-<div>
+<div class="card-header">
+  <span class="h3"
+    >{{ weatherReport?.locationName }} ({{ weatherReport?.zipcode }})</span
+  >
   <span class="close" role="button" (click)="removeLocation()">×</span>
-  <img
-    [src]="getConditionImageUrl(weatherReport?.condition)"
-    [alt]="getConditionString(weatherReport?.condition)"
-  />
+</div>
+<div class="card-body d-flex justify-content-between">
+  <div>
+    <h4>
+      Current conditions:
+      {{ getConditionString(weatherReport?.condition) }}
+    </h4>
+    <h4>Temperatures today:</h4>
+    <p>
+      Current {{ weatherReport?.temp | number: '1.0-0' }} - Max
+      {{ weatherReport?.maxTemp | number: '1.0-0' }} - Min
+      {{ weatherReport?.minTemp | number: '1.0-0' }}
+    </p>
+    <p>
+      <a [routerLink]="['/forecast', weatherReport?.zipcode || '']"
+        >Show 5-day forecast for {{ weatherReport?.locationName }}</a
+      >
+    </p>
+  </div>
+  <div>
+    <img
+      [src]="getConditionImageUrl(weatherReport?.condition)"
+      [alt]="getConditionString(weatherReport?.condition)"
+    />
+  </div>
 </div>

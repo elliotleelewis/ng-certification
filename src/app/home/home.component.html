@@ -1,42 +1,47 @@
 <div class="container-fluid">
   <form
-    class="well"
+    class="card bg-light mb-2"
     #addLocationForm="ngForm"
     (ngSubmit)="addLocation(); addLocationForm.reset()"
   >
-    <label class="h2" for="zipcode">Enter a zipcode:</label>
-    <input
-      id="zipcode"
-      class="form-control"
-      name="zipcode"
-      placeholder="Zipcode"
-      type="text"
-      required
-      [pattern]="'^[0-9]{5}$'"
-      [maxLength]="5"
-      [minLength]="5"
-      [(ngModel)]="addLocationFormData.zipcode"
-    />
-    <br />
-    <button
-      class="btn btn-primary"
-      id="add-location-btn"
-      [disabled]="addLocationForm.invalid"
-    >
-      Add location
-    </button>
-    <button
-      class="btn btn-danger"
-      id="clear-location-btn"
-      type="button"
-      [disabled]="!locations?.length"
-      (click)="clearLocations()"
-    >
-      Clear locations
-    </button>
+    <div class="card-body">
+      <label class="h2" for="zipcode">Enter a zipcode:</label>
+      <input
+        id="zipcode"
+        class="form-control"
+        name="zipcode"
+        placeholder="Zipcode"
+        type="text"
+        required
+        [pattern]="'^[0-9]{5}$'"
+        [maxLength]="5"
+        [minLength]="5"
+        [(ngModel)]="addLocationFormData.zipcode"
+      />
+      <br />
+      <div class="btn-group">
+        <button
+          class="btn btn-primary"
+          id="add-location-btn"
+          [disabled]="addLocationForm.invalid"
+        >
+          Add location
+        </button>
+        <button
+          class="btn btn-danger"
+          id="clear-location-btn"
+          type="button"
+          [disabled]="!locations?.length"
+          (click)="clearLocations()"
+        >
+          Clear locations
+        </button>
+      </div>
+    </div>
   </form>
   <div>
     <app-weather-report
+      class="mb-2"
       *ngFor="let weatherReport of weatherReports"
       [weatherReport]="weatherReport"
     ></app-weather-report>

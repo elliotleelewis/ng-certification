@@ -10,10 +10,8 @@ import { LocationService } from '../../services/location.service';
   styleUrls: ['./weather-report.component.css'],
 })
 export class WeatherReportComponent {
-  @HostBinding('class.flex')
-  readonly classFlex = true;
-  @HostBinding('class.well')
-  readonly classWell = true;
+  @HostBinding('class.card')
+  readonly classCard = true;
 
   readonly getConditionString = getConditionString;
   readonly getConditionImageUrl = getConditionImageUrl;
