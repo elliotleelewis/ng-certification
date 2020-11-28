@@ -2,14 +2,14 @@ export interface OpenWeatherMapDailyForecast {
   city: {
     name: string;
   };
-  list: Array<{
+  list: {
     dt: number;
     temp: {
       max: number;
       min: number;
     };
-    weather: Array<{
+    weather: {
       main: string;
-    }>;
-  }>;
+    }[];
+  }[];
 }

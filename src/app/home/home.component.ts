@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   addLocationFormData = {
     zipcode: '',
   };
-  weatherReports: Array<WeatherReport | Partial<WeatherReport>> = [];
+  weatherReports: (WeatherReport | Partial<WeatherReport>)[] = [];
 
   private subs = new SubSink();
 

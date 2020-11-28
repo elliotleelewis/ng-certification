@@ -5,7 +5,7 @@ export interface OpenWeatherMapWeatherReport {
     temp_max: number;
     temp_min: number;
   };
-  weather: Array<{
+  weather: {
     main: string;
-  }>;
+  }[];
 }
